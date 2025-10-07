@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDGZilla AutoElectroPro - Professional Auto Electrician Diagnostics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #e63946;
+            --accent: #2a9d8f;
+            --light: #f1faee;
+            --dark: #1d3557;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #e63946;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: rgb(255, 255, 255);
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin: 0.3rem;
+        }
+        
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Car Brands Section */
+        .car-brands {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .car-brands .section-title h2 {
+            color: white;
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .brand-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .brand-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--accent);
+        }
+        
+        .brand-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Car Diagrams Section */
+        .car-diagrams {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .diagrams-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .diagrams-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            width: 300px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            width: 100%;
+            outline: none;
+        }
+        
+        .brands-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .brand-btn {
+            background-color: var(--light);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .brand-btn.active, .brand-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .diagrams-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .diagram-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .diagram-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .diagram-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .diagram-card:hover .diagram-image img {
+            transform: scale(1.05);
+        }
+        
+        .diagram-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pdf-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .diagram-content {
+            padding: 1.5rem;
+        }
+        
+        .diagram-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .diagram-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .file-size {
+            background: var(--light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .diagram-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .diagram-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .view-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .view-btn-primary:hover {
+            background: var(--dark);
+        }
+        
+        .download-btn {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            background: #238f7d;
+        }
+        
+        /* Problems & Solutions Section */
+        .problems {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .problem-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .problem-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .problem-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .problem-content {
+            padding: 1.5rem;
+        }
+        
+        .problem-content ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+        
+        .problem-content ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .problem-content ul li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Diagram Modal */
+        .diagram-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .diagram-info {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .diagram-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .diagram-tools {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .tool-btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .print-btn {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .print-btn:hover {
+            background: #238f7d;
+        }
+        
+        .share-btn {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        .share-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        /* File Size Warning */
+        .file-size-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .file-size-warning i {
+            color: #f39c12;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                margin-top: 0.5rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .diagrams-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .brands-filter {
+                justify-content: center;
+            }
+            
+            .diagrams-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .diagram-actions {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            .pdf-viewer {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                    <h1>SDGZilla AutoElectroPro</h1>
+                </div>
+                <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+                <nav>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li class="dropdown">
+                            <a href="#"><i class="fas fa-tools"></i> Diagnostic Tools <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="#"><i class="fas fa-car-battery"></i> Battery Testing</a>
+                                <a href="#"><i class="fas fa-microchip"></i> ECU Diagnostics</a>
+                                <a href="#"><i class="fas fa-plug"></i> Wiring Analysis</a>
+                                <a href="#"><i class="fas fa-lightbulb"></i> Lighting Systems</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><i class="fas fa-car"></i> Car Diagrams <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="#"><i class="fas fa-flag"></i> Pakistani Cars</a>
+                                <a href="#"><i class="fas fa-globe"></i> Japanese Cars</a>
+                                <a href="#"><i class="fas fa-flag-usa"></i> American Cars</a>
+                                <a href="#"><i class="fas fa-flag-eu"></i> European Cars</a>
+                                <a href="#"><i class="fas fa-flag"></i> Korean Cars</a>
+                            </div>
+                        </li>
+                        <li><a href="#problems"><i class="fas fa-exclamation-triangle"></i> Common Problems</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Professional Auto Electrician Diagnostics</h2>
+            <p>Complete wiring diagrams, diagnostic procedures, and troubleshooting guides for all car models worldwide. Specialized in Pakistani car electrical systems.</p>
+            <a href="#car-brands" class="btn">Explore Car Brands</a>
+            <a href="#car-diagrams" class="btn btn-outline">View Car Diagrams</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Diagnostic Services</h2>
+                <p>Comprehensive auto electrical solutions for all vehicle types</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <h3>Battery & Charging Systems</h3>
+                    <p>Complete testing and diagnostics for batteries, alternators, and charging circuits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>ECU & Computer Diagnostics</h3>
+                    <p>Advanced scanning and programming for engine control units and vehicle computers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Starting Systems</h3>
+                    <p>Diagnose and repair starter motors, ignition switches, and related circuits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Lighting Systems</h3>
+                    <p>Headlights, taillights, indicators, and interior lighting diagnostics and repair.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3>HVAC Systems</h3>
+                    <p>Heating, ventilation, and air conditioning electrical system diagnostics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety Systems</h3>
+                    <p>ABS, airbags, traction control, and other safety system electrical diagnostics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Brands Section (Replaced Diagnostic Tools) -->
+    <section class="car-brands" id="car-brands">
+        <div class="container">
+            <div class="section-title">
+                <h2>Car Brands Collection</h2>
+                <p>Explore wiring diagrams and diagnostic information for all major car brands</p>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-flag"></i></span>
+                    <h3>Pakistani Cars</h3>
+                    <p>Suzuki, Toyota, Honda and other popular models in Pakistan with complete wiring diagrams.</p>
+                </div>
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-globe-asia"></i></span>
+                    <h3>Japanese Cars</h3>
+                    <p>Toyota, Honda, Nissan, Suzuki, Mitsubishi with detailed electrical schematics.</p>
+                </div>
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-flag-usa"></i></span>
+                    <h3>American Cars</h3>
+                    <p>Ford, Chevrolet, Dodge, Jeep with complete wiring diagrams and troubleshooting guides.</p>
+                </div>
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-flag-eu"></i></span>
+                    <h3>European Cars</h3>
+                    <p>BMW, Mercedes, Audi, Volkswagen, Volvo with advanced electrical systems.</p>
+                </div>
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-flag"></i></span>
+                    <h3>Korean Cars</h3>
+                    <p>Hyundai, Kia with modern electrical systems and computer diagnostics.</p>
+                </div>
+                <div class="brand-card">
+                    <span class="brand-icon"><i class="fas fa-car"></i></span>
+                    <h3>Chinese Cars</h3>
+                    <p>New generation Chinese vehicles with complete wiring diagrams and ECU information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Car Diagrams Section -->
+    <section class="car-diagrams" id="car-diagrams">
+        <div class="container">
+            <div class="diagrams-header">
+                <h2>Car Wiring Diagrams Database</h2>
+                <p>Complete electrical schematics in PDF format for vehicles from around the world. Files up to 1GB supported.</p>
+            </div>
+            
+            <div class="diagrams-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="diagramSearch" placeholder="Search diagrams by car model, year, or system...">
+                </div>
+                
+                <div class="brands-filter">
+                    <button class="brand-btn active" data-brand="all">
+                        <i class="fas fa-layer-group"></i> All Brands
+                    </button>
+                    <button class="brand-btn" data-brand="toyota">
+                        <i class="fas fa-car"></i> Toyota
+                    </button>
+                    <button class="brand-btn" data-brand="honda">
+                        <i class="fas fa-car"></i> Honda
+                    </button>
+                    <button class="brand-btn" data-brand="suzuki">
+                        <i class="fas fa-car"></i> Suzuki
+                    </button>
+                    <button class="brand-btn" data-brand="hyundai">
+                        <i class="fas fa-car"></i> Hyundai
+                    </button>
+                    <button class="brand-btn" data-brand="kia">
+                        <i class="fas fa-car"></i> Kia
+                    </button>
+                    <button class="brand-btn" data-brand="nissan">
+                        <i class="fas fa-car"></i> Nissan
+                    </button>
+                </div>
+            </div>
+            
+            <div class="file-size-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Large PDF files (up to 1GB) may take longer to load. Ensure stable internet connection for best experience.</span>
+            </div>
+            
+            <div class="diagrams-container" id="diagramsContainer">
+                <!-- Diagram cards will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Diagram Modal -->
+    <div class="diagram-modal" id="diagramModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalDiagramTitle">Diagram Title</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="file-size-warning">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="modalFileInfo">Loading PDF file...</span>
+                </div>
+                
+                <iframe src="" class="pdf-viewer" id="pdfViewer" frameborder="0"></iframe>
+                
+                <div class="diagram-info">
+                    <div class="diagram-details" id="modalDiagramDetails">
+                        <!-- Details will be populated by JavaScript -->
+                    </div>
+                    <div class="diagram-tools">
+                        <button class="tool-btn print-btn" id="printDiagram">
+                            <i class="fas fa-print"></i> Print Diagram
+                        </button>
+                        <button class="tool-btn download-btn" id="downloadDiagram">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                        <button class="tool-btn share-btn" id="shareDiagram">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problems & Solutions Section -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div class="section-title">
+                <h2>Common Auto Electrical Problems</h2>
+                <p>Diagnostic guides for frequent electrical issues</p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <i class="fas fa-car-battery problem-icon"></i>
+                        <h3>Battery Drain Issues</h3>
+                    </div>
+                    <div class="problem-content">
+                        <p>Identifying and fixing parasitic battery drain problems:</p>
+                        <ul>
+                            <li>Test for current draw with multimeter</li>
+                            <li>Check for aftermarket accessories</li>
+                            <li>Inspect alternator diode</li>
+                            <li>Test control modules for sleep mode issues</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <i class="fas fa-lightbulb problem-icon"></i>
+                        <h3>Lighting Problems</h3>
+                    </div>
+                    <div class="problem-content">
+                        <p>Diagnosing and repairing lighting system faults:</p>
+                        <ul>
+                            <li>Check fuses and relays</li>
+                            <li>Test bulbs and sockets</li>
+                            <li>Inspect wiring and connectors</li>
+                            <li>Verify ground connections</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <i class="fas fa-tachometer-alt problem-icon"></i>
+                        <h3>Starting System Failure</h3>
+                    </div>
+                    <div class="problem-content">
+                        <p>Troubleshooting no-start conditions:</p>
+                        <ul>
+                            <li>Test battery voltage and connections</li>
+                            <li>Check starter motor and solenoid</li>
+                            <li>Inspect ignition switch and wiring</li>
+                            <li>Verify security system operation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <i class="fas fa-exclamation-triangle problem-icon"></i>
+                        <h3>Warning Lights</h3>
+                    </div>
+                    <div class="problem-content">
+                        <p>Diagnosing dashboard warning indicators:</p>
+                        <ul>
+                            <li>Read diagnostic trouble codes</li>
+                            <li>Check sensor operation and wiring</li>
+                            <li>Test related systems and components</li>
+                            <li>Clear codes and verify repair</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get professional auto electrical diagnostic assistance</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Phone Number</h3>
+                            <p>+92 300 1234567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email Address</h3>
+                            <p>info@sdgzillautoelectropro.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Auto Market, Lahore, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                            <p>Saturday: 10:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicle">Vehicle Make & Model</label>
+                            <input type="text" id="vehicle" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="problem">Electrical Problem Description</label>
+                            <textarea id="problem" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Diagnostic Request</button>
+                    </form>
+
+                    <!-- Message thread: shows sent message and responses -->
+                    <div id="messageThread" style="margin-top:1.5rem;">
+                        <h4 style="margin-bottom:0.5rem;">Messages</h4>
+                        <div id="messages" aria-live="polite">
+                            <!-- Sent and received message cards appended here -->
+                        </div>
+                    </div>
+
+                    <!-- Note: To actually send/receive emails, integrate a backend or a service like EmailJS, Formspree, or your own mail server. -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SDGZilla AutoElectroPro</h3>
+                    <p>Professional auto electrician diagnostics and repair services. Specialized in all car models with comprehensive wiring diagrams and troubleshooting guides.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#car-brands">Car Brands</a></li>
+                        <li><a href="#car-diagrams">Car Diagrams</a></li>
+                        <li><a href="#problems">Common Problems</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Diagnostic Services</h3>
+                    <ul>
+                        <li><a href="#">Battery Systems</a></li>
+                        <li><a href="#">ECU Diagnostics</a></li>
+                        <li><a href="#">Wiring Repair</a></li>
+                        <li><a href="#">Lighting Systems</a></li>
+                        <li><a href="#">Starting Systems</a></li>
+                        <li><a href="#">Charging Systems</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone-alt"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-envelope"></i> info@sdgzillautoelectropro.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Auto Market, Lahore, Pakistan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SDGZilla AutoElectroPro. All rights reserved. | Professional Auto Electrician Diagnostics</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Form Submission (enhanced: show sent message and simulated received reply)
+        (function() {
+            const form = document.getElementById('contactForm');
+            const messagesEl = document.getElementById('messages');
+
+            // Live region for accessibility updates
+            const liveRegion = document.createElement('div');
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            liveRegion.style.position = 'absolute';
+            liveRegion.style.left = '-9999px';
+            liveRegion.style.width = '1px';
+            liveRegion.style.height = '1px';
+            document.body.appendChild(liveRegion);
+
+            function createMessageCard({type, name, email, phone, vehicle, problem, time}) {
+                const card = document.createElement('div');
+                card.className = 'message-card';
+                card.style.border = '1px solid #e0e0e0';
+                card.style.borderRadius = '6px';
+                card.style.padding = '0.8rem';
+                card.style.marginBottom = '0.8rem';
+                card.style.background = type === 'sent' ? '#f1f8ff' : '#fff8e1';
+
+                const header = document.createElement('div');
+                header.style.display = 'flex';
+                header.style.justifyContent = 'space-between';
+                header.style.marginBottom = '0.5rem';
+
+                const title = document.createElement('strong');
+                title.textContent = type === 'sent' ? `Sent to SDGZilla` : `Received from SDGZilla`;
+                header.appendChild(title);
+
+                const timeEl = document.createElement('small');
+                timeEl.style.color = '#666';
+                timeEl.textContent = time || new Date().toLocaleString();
+                header.appendChild(timeEl);
+
+                const body = document.createElement('div');
+                body.innerHTML = `
+                    <div style="font-size:0.95rem; margin-bottom:0.5rem;"><strong>${name}</strong> &lt;${email}&gt; • ${phone}</div>
+                    <div style="font-size:0.95rem; margin-bottom:0.5rem;"><strong>Vehicle:</strong> ${vehicle}</div>
+                    <div style="white-space:pre-wrap;">${problem}</div>
+                `;
+
+                card.appendChild(header);
+                card.appendChild(body);
+                return card;
+            }
+
+            function appendMessage(card) {
+                messagesEl.insertBefore(card, messagesEl.firstChild);
+            }
+
+            function simulateReply(formData) {
+                // Simulate server processing delay (e.g., 4 seconds)
+                setTimeout(() => {
+                    const reply = document.createElement('div');
+                    reply.className = 'message-card-reply';
+                    reply.style.border = '1px solid #e0e0e0';
+                    reply.style.borderRadius = '6px';
+                    reply.style.padding = '0.8rem';
+                    reply.style.marginBottom = '0.8rem';
+                    reply.style.background = '#fff';
+
+                    reply.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                            <strong>SDGZilla Support</strong>
+                            <small style="color:#666;">${new Date().toLocaleString()}</small>
+                        </div>
+                        <div style="margin-bottom:0.5rem;">Hello ${formData.name},</div>
+                        <div style="white-space:pre-wrap; margin-bottom:0.5rem;">Thanks for your diagnostic request for your ${formData.vehicle}. Our technician has reviewed your message and will contact you with next steps. Reference ID: <strong>#SDG-${Math.floor(Math.random()*900000+100000)}</strong></div>
+                        <div style="font-size:0.9rem; color:#444;">If this is urgent, please call +92 300 1234567.</div>
+                    `;
+
+                    appendMessage(reply);
+                    liveRegion.textContent = 'You have received a reply from SDGZilla.';
+                }, 4000);
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    vehicle: document.getElementById('vehicle').value.trim(),
+                    problem: document.getElementById('problem').value.trim(),
+                };
+
+                // Basic client-side validation
+                if (!formData.name || !formData.email || !formData.problem) {
+                    alert('Please fill in required fields (name, email, problem).');
+                    return;
+                }
+
+                // Create sent message card and append
+                const sentCard = createMessageCard(Object.assign({type: 'sent'}, formData, {time: new Date().toLocaleString()}));
+                appendMessage(sentCard);
+
+                // Update live region for screen readers
+                liveRegion.textContent = 'Your diagnostic request has been sent.';
+
+                // Reset form
+                form.reset();
+
+                // Simulate a received email reply
+                simulateReply(formData);
+
+                // Optionally: here is where you would POST the form to your backend or an email service API
+            });
+        })();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Enhanced Diagrams Data - EASILY UPDATE THIS ARRAY TO ADD/MODIFY DIAGRAMS
+        const diagramsData = [
+            {
+                id: 1,
+                title: "Toyota Corolla 2020 - complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "Toyota-Corolla-2020-TopRent.ua_1.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "850 MB",
+                pages: 45,
+                category: "popular",
+                addedDate: "2023-10-15"
+            },
+            {id: 2,
+                title: "Toyota Corolla Altis 2010- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "toyota-corolla-altis-2008-2010.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+
+            },
+            {id: 3,
+                title: "Toyota Corolla Altis 2011- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "Toyota-Corolla-Altis-2011.avif",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 4,
+                title: "Toyota Corolla Altis 2012- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "tn_toyota-corolla-2012.webp",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 5,
+                title: "Toyota Corolla Altis 2013- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "Toyota-Corolla-Altis-2013.webp",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 6,
+                title: "Toyota Corolla Altis 2014- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "2014.jpeg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 7,
+                title: "Toyota Corolla Altis 2015- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "2015_Toyota_Corolla_Altis_.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 8,
+                title: "Toyota Corolla Altis 2016- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "2016-Toyota-Corolla-Altis-.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {id: 9,
+                title: "Toyota Corolla Altis 2017- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "2018.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {
+                id: 10,
+                title: "Toyota Corolla Altis 2018- complete Electrical System wiring diagram ",
+                brand: "toyota",
+                model: "Corolla",
+                year: "2020",
+                system: "Complete Electrical System",
+                image: "2016.jpg",
+                pdfUrl: "https://drive.google.com/file/d/1WhmS-HBUuO-UD005jp6O8qteePi0wsU4/view?usp=sharing",
+                description: "Complete wiring diagram with ECU pinouts, fuse box locations, ground points, and troubleshooting guide.",
+                fileSize: "50 MB",
+                pages: 46,
+                category: "Toyota",
+                addedDate: "2023-10-15"
+            },
+            {
+                id: 11,
+                title: "Honda Civic 2019 - complete Electrical System wiring diagram ",
+                brand: "honda",
+                model: "Civic",
+                year: "2019",
+                system: "Engine Management",
+                image: "01-58-500x323.avif",
+                pdfUrl: "https://example.com/diagrams/honda-civic-2019.pdf",
+                description: "Detailed schematic of engine control unit, sensors, actuator circuits, and diagnostic procedures.",
+                fileSize: "720 MB",
+                pages: 38,
+                category: "recent",
+                addedDate: "2023-11-05"
+            },
+            {
+                id: 12,
+                title: "suzuki alto - complete Electrical System wiring diagram ",
+                brand: "suzuki",
+                model: "Mehran",
+                year: "2015",
+                system: "Complete Electrical System",
+                image: "1729170136_mobile_banner_image.jpg",
+                pdfUrl: "https://example.com/diagrams/suzuki-mehran-complete.pdf",
+                description: "Classic Pakistani car complete electrical system with charging, starting, and lighting circuits.",
+                fileSize: "450 MB",
+                pages: 25,
+                category: "popular",
+                addedDate: "2023-09-20"
+            }
+        ];
+
+        // Function to render diagrams
+        function renderDiagrams(diagrams) {
+            const container = document.getElementById('diagramsContainer');
+            container.innerHTML = '';
+            
+            if (diagrams.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <h3>No diagrams found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            diagrams.forEach(diagram => {
+                const card = document.createElement('div');
+                card.className = 'diagram-card';
+                card.innerHTML = `
+                    <div class="diagram-image">
+                        <img src="${diagram.image}" alt="${diagram.title}">
+                        <div class="diagram-badge">${diagram.brand.toUpperCase()}</div>
+                        <div class="pdf-badge">PDF</div>
+                    </div>
+                    <div class="diagram-content">
+                        <h3 class="diagram-title">${diagram.title}</h3>
+                        <div class="diagram-meta">
+                            <span><i class="fas fa-calendar"></i> ${diagram.year}</span>
+                            <span class="file-size">${diagram.fileSize}</span>
+                        </div>
+                        <p class="diagram-description">${diagram.description}</p>
+                        <div class="diagram-actions">
+                            <button class="action-btn view-btn-primary" data-id="${diagram.id}">
+                                <i class="fas fa-eye"></i> View PDF
+                            </button>
+                            <button class="action-btn download-btn" data-id="${diagram.id}">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Add event listeners to view buttons
+            document.querySelectorAll('.view-btn-primary').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const diagramId = this.getAttribute('data-id');
+                    openDiagramModal(diagramId);
+                });
+            });
+            
+            // Add event listeners to download buttons
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const diagramId = this.getAttribute('data-id');
+                    downloadDiagram(diagramId);
+                });
+            });
+        }
+
+        // Function to open diagram modal
+        function openDiagramModal(diagramId) {
+            const diagram = diagramsData.find(d => d.id == diagramId);
+            if (!diagram) return;
+            
+            document.getElementById('modalDiagramTitle').textContent = diagram.title;
+            document.getElementById('pdfViewer').src = diagram.pdfUrl;
+            document.getElementById('modalFileInfo').textContent = `Loading PDF (${diagram.fileSize}) - This may take a moment for large files.`;
+            
+            // Populate diagram details
+            const detailsContainer = document.getElementById('modalDiagramDetails');
+            detailsContainer.innerHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Brand</span>
+                    <span>${diagram.brand.charAt(0).toUpperCase() + diagram.brand.slice(1)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Model</span>
+                    <span>${diagram.model}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Year</span>
+                    <span>${diagram.year}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">System</span>
+                    <span>${diagram.system}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">File Size</span>
+                    <span>${diagram.fileSize}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Pages</span>
+                    <span>${diagram.pages}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Added</span>
+                    <span>${diagram.addedDate}</span>
+                </div>
+            `;
+            
+            // Show modal
+            document.getElementById('diagramModal').style.display = 'flex';
+        }
+
+        // Function to download diagram
+        function downloadDiagram(diagramId) {
+            const diagram = diagramsData.find(d => d.id == diagramId);
+            if (!diagram) return;
+            
+            // Create a temporary link to trigger download
+            const link = document.createElement('a');
+            link.href = diagram.pdfUrl;
+            link.download = `${diagram.brand}-${diagram.model}-${diagram.year}-${diagram.system}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show download confirmation
+            alert(`Downloading: ${diagram.title}\nFile Size: ${diagram.fileSize}\nThis may take several minutes for large files.`);
+        }
+
+        // Function to filter diagrams by brand
+        function filterDiagramsByBrand(brand) {
+            if (brand === 'all') {
+                renderDiagrams(diagramsData);
+            } else {
+                const filteredDiagrams = diagramsData.filter(d => d.brand === brand);
+                renderDiagrams(filteredDiagrams);
+            }
+        }
+
+        // Function to search diagrams
+        function searchDiagrams(query) {
+            const filteredDiagrams = diagramsData.filter(diagram => 
+                diagram.title.toLowerCase().includes(query.toLowerCase()) ||
+                diagram.brand.toLowerCase().includes(query.toLowerCase()) ||
+                diagram.model.toLowerCase().includes(query.toLowerCase()) ||
+                diagram.year.includes(query) ||
+                diagram.system.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            renderDiagrams(filteredDiagrams);
+        }
+
+        // Initialize diagrams on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render all diagrams initially
+            renderDiagrams(diagramsData);
+            
+            // Brand filter buttons
+            document.querySelectorAll('.brand-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterDiagramsByBrand(this.getAttribute('data-brand'));
+                });
+            });
+            
+            // Search functionality
+            document.getElementById('diagramSearch').addEventListener('input', function() {
+                searchDiagrams(this.value);
+            });
+            
+            // Close modal
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('diagramModal').style.display = 'none';
+                document.getElementById('pdfViewer').src = '';
+            });
+            
+            // Close modal when clicking outside
+            document.getElementById('diagramModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                    document.getElementById('pdfViewer').src = '';
+                }
+            });
+            
+            // Print diagram
+            document.getElementById('printDiagram').addEventListener('click', function() {
+                const pdfFrame = document.getElementById('pdfViewer');
+                pdfFrame.contentWindow.print();
+            });
+            
+            // Share diagram
+            document.getElementById('shareDiagram').addEventListener('click', function() {
+                const diagramTitle = document.getElementById('modalDiagramTitle').textContent;
+                if (navigator.share) {
+                    navigator.share({
+                        title: diagramTitle,
+                        text: 'Check out this car wiring diagram',
+                        url: window.location.href + '#car-diagrams'
+                    });
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    alert(`Share this diagram: ${diagramTitle}`);
+                }
+            });
+            
+            // Download diagram from modal
+            document.getElementById('downloadDiagram').addEventListener('click', function() {
+                const activeDiagram = document.querySelector('.view-btn-primary[data-id]');
+                if (activeDiagram) {
+                    const diagramId = activeDiagram.getAttribute('data-id');
+                    downloadDiagram(diagramId);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
